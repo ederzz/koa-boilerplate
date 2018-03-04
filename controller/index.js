@@ -10,7 +10,9 @@ module.exports = {
         ctx.response.body = 'here is home page.';
     },
     test: async (ctx, next) => {
-        ctx.response.body = 'hree is test.';
+        await ctx.render('test', {
+            pageName: '这里是test页面'
+        });
         await next();
     },
     user: async (ctx, next) => {

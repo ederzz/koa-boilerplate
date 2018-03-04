@@ -1,8 +1,19 @@
 const Koa = require('koa');
+const path = require('path');
 const bodyParser = require('koa-bodyparser');
+const nunjucks = require('koa-nunjucks-2');
 const router = require('./router');
 
 const app = new Koa();
+
+/**模板引擎 */
+app.use(nunjucks({
+    ext: 'html',
+    path: path.join(__dirname, 'views'),
+    nunjucksConfig: {
+        trimBlocks: true 
+    }
+}));
 
 /**解析post请求 */
 app.use(bodyParser());
