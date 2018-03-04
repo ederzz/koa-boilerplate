@@ -41,12 +41,26 @@ const router = new Router();
 router.get('/', async (ctx, next) => {
     ctx.response.body = 'here is home.';
 })
+.get('/home', async (ctx, next) => {
+    // 参数放在url后面：?a=1&b=2
+    console.log(ctx.request.query);
+    console.log(ctx.request.querystring);
+    ctx.response.body = 'here is home page.';
+})
 .get('/test', async (ctx, next) => {
     ctx.response.body = 'hree is test.';
     await next();
 })
 .get('/user/:id', async (ctx, next) => {
+    // 参数放在url中
     ctx.response.body = `用户id：${ctx.params.id}`;
+})
+.post('/user', async (ctx, next) => {
+    const {
+        name,
+        age
+    } = ctx.request.body;
+    ctx.response.body = `${age}岁的${name}`;
 })
 .all('/test', async (ctx, next) => {
     console.log('路由处理中间件。');
