@@ -16,6 +16,7 @@
     "koa-bodyparser": "^4.2.0",
     "koa-nunjucks-2": "^3.0.2",
     "koa-router": "^7.4.0",
-    "koa-static": "^4.0.2"
+    "koa-static": "^4.0.2",
+    "mongoose": "^5.0.9"
   }
 }

@@ -1,6 +1,22 @@
+const userModel = require('../models');
+
 /**如果每个路由的业务逻辑更加复杂，还可以再抽离服务层 helper service都可以 */
 module.exports = {
     index: async (ctx, next) => {
+
+        const person = new userModel({
+            name: 'shenyiling',
+            age: 17
+        });
+        person.save(error => {
+            if(error) {
+                console.log('插入数据失败');
+            } else {
+                console.log('数据插入成功.');
+            }
+
+        });
+
         ctx.response.body = 'here is home.';
     },
     home: async (ctx, next) => {
