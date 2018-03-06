@@ -3,8 +3,12 @@ const path = require('path');
 const bodyParser = require('koa-bodyparser');
 const nunjucks = require('koa-nunjucks-2');
 const router = require('./router');
+const serve = require('koa-static');
 
 const app = new Koa();
+
+/**指定静态资源目录 */
+app.use(serve(path.resolve(__dirname, "./static")));
 
 /**模板引擎 */
 app.use(nunjucks({
