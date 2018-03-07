@@ -2,8 +2,10 @@ const Koa = require('koa');
 const path = require('path');
 const bodyParser = require('koa-bodyparser');
 const nunjucks = require('koa-nunjucks-2');
-const router = require('./router');
 const serve = require('koa-static');
+
+const indexRouter = require('./router');
+const accountRouter = require('./router/account');
 
 const app = new Koa();
 
@@ -31,7 +33,8 @@ app.use(async (ctx, next) => {
     console.log(`请求地址：${ctx.path}, 请求方法：${ctx.request.method}, 响应时间：${eTime - sTime}ms`);
 });
 
-app.use(router.routes());
+app.use(indexRouter.routes());
+app.use(accountRouter.routes());
 
 app.listen(3000, () => {
     console.log('server is running.');

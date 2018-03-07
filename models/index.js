@@ -1,12 +1,12 @@
-const mongoose = require('./db')
-// 创建一个schema对象
-const Schema = mongoose.Schema
-// 创建一个schema实例
-let UserSchema = new Schema({
-  username: {type: String},
-  userpwd: {type: String},
-  userage: {type: Number},
-  logindate: {type: Date}
+const mongoose = require('./db');
+
+const accountSchema = mongoose.Schema({
+  accountName: {type: String},
+  accountPwd: {type: String}
 })
-// 利用UserSchema实例,发布一个User的model并且导出
-module.exports = mongoose.model('User',UserSchema)
+
+module.exports = mongoose.model('modelName', accountSchema, 'account');
+
+/**createConnection方式建立model */
+// const con = require('./db');
+// module.exports = con.model('user',UserSchema);

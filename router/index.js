@@ -1,7 +1,6 @@
-const Router = require('koa-router');
-const router = new Router();
+const router = require('koa-router')();
 
-const homeController = require('../controller');
+const homeController = require('../controller/index');
 
 /**路由前缀设置 */
 // const router = new Router({
@@ -41,9 +40,9 @@ const homeController = require('../controller');
 // router.redirect('sign-in');
 
 router.get('/', homeController.index)
-.get('/home', homeController.home)
+.get('/query', homeController.query)
 .get('/test', homeController.test)
-.get('/user/:id', homeController.user)
+.get('/param/:id', homeController.param)
 .post('/user', homeController.addUser)
 .all('/test', homeController.all);
 
