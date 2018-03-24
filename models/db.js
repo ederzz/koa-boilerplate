@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
-const dbUrl = 'mongodb://localhost:27017/koaIntroduction';
+const config = require('config');
+const hostName = config.get('mongoDB.hostname');
+const port = config.get('mongoDB.port');
+const dbname = config.get('mongoDB.dbname');
+
+const dbUrl = `mongodb://${hostName}:${port}/${dbname}`;
 
 mongoose.connect(dbUrl, error => {
   if(error) {

@@ -1,0 +1,16 @@
+{
+    "appName": "Koa-Introduction",
+    "author": "shenyiling",
+    "version": "0.0.1",
+    "mongoDB": {
+        "hostname": "localhost",
+        "port": 27017,
+        "dbname": "koaIntroduction",
+        "username": "",
+        "password": ""
+    },
+    "host": {
+        "hostname": "localhost",
+        "port": 3002
+    }
+}

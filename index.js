@@ -3,7 +3,10 @@ const path = require('path');
 const bodyParser = require('koa-bodyparser');
 const nunjucks = require('koa-nunjucks-2');
 const serve = require('koa-static');
+const config = require('config');
 
+const hostname = config.get('host.hostname');
+const port = config.get('host.port');
 const indexRouter = require('./router');
 const accountRouter = require('./router/account');
 
@@ -33,9 +36,11 @@ app.use(async (ctx, next) => {
     console.log(`请求地址：${ctx.path}, 请求方法：${ctx.request.method}, 响应时间：${eTime - sTime}ms`);
 });
 
+/**路由 */
 app.use(indexRouter.routes());
 app.use(accountRouter.routes());
 
-app.listen(3000, () => {
-    console.log('server is running.');
+app.listen(port, () => {
+    console.log(`server is running at ${hostname}:${port}`);
+    console.log(process.env.NODE_ENV);
 });

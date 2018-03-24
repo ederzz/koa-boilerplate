@@ -6,11 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index",
-    "debug": "node --inspect index"
+    "debug": "node --inspect index",
+    "build": "set NODE_ENV=production&& node index"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "config": "^1.30.0",
     "is-generator-function": "^1.0.7",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",

@@ -1,5 +1,6 @@
 module.exports = {
     index: async (ctx, next) => {
+        console.log(ctx.request.header);
         ctx.body = 'here is home.';
     },
     query: async (ctx, next) => {
