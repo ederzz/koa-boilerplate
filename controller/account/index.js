@@ -1,4 +1,5 @@
 const accountModel = require('../../models');
+const helper = require('./helper');
 
 module.exports = {
     signUp: async (ctx, next) => {
@@ -20,7 +21,7 @@ module.exports = {
 
         const cResult = await accountModel.create({
             accountName,
-            accountPwd
+            accountPwd: helper.md5Encrypt(accountPwd)
         });
 
         if(cResult.errors) {
@@ -45,7 +46,7 @@ module.exports = {
 
         const res = await accountModel.findOne({
             accountName,
-            accountPwd
+            accountPwd: helper.md5Encrypt(accountPwd)
         });
 
         if(!res) {
