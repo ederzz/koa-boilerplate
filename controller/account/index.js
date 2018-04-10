@@ -72,7 +72,7 @@ module.exports = {
 
         const res = await accountModel.findOne({
             accountName,
-            accountPwd
+            accountPwd: helper.md5Encrypt(accountPwd)
         });
 
         if(!res) {
@@ -82,7 +82,7 @@ module.exports = {
             };
             return ;
         }
-        const uRes = await accountModel.updateOne({ accountName }, { accountPwd: newPwd });
+        const uRes = await accountModel.updateOne({ accountName }, { accountPwd: helper.md5Encrypt(newPwd) });
         if(uRes.errors) {
             ctx.body = {
                 status: false,
