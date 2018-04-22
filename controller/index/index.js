@@ -1,9 +1,9 @@
 module.exports = {
-    index: async (ctx, next) => {
+    index: (ctx, next) => {
         console.log(ctx.request.header);
         ctx.body = 'here is home.';
     },
-    query: async (ctx, next) => {
+    query: (ctx, next) => {
         // 参数放在url后面：?a=1&b=2
         console.log(ctx.request.query);
         console.log(ctx.request.querystring);
@@ -15,18 +15,18 @@ module.exports = {
         });
         await next();
     },
-    param: async (ctx, next) => {
+    param: (ctx, next) => {
         // 参数放在url中
         ctx.body = `参数存放在url中,用户id：${ctx.params.id}`;
     },
-    addUser: async (ctx, next) => {
+    addUser: (ctx, next) => {
         const {
             name,
             age
         } = ctx.request.body;
         ctx.body = `post传参：${age}岁的${name}`;
     },
-    all: async (ctx, next) => {
+    all: (ctx, next) => {
         console.log('路由处理中间件。');
     }
 }
