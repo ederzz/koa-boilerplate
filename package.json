@@ -20,5 +20,8 @@
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
     "mongoose": "^5.0.9"
+  },
+  "devDependencies": {
+    "chalk": "^2.4.1"
   }
 }

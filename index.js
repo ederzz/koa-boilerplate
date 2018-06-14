@@ -5,6 +5,7 @@ const nunjucks = require('koa-nunjucks-2');
 const serve = require('koa-static');
 const config = require('config');
 const fs = require('fs');
+const chalk = require('chalk')
 
 const hostname = config.get('host.hostname');
 const port = config.get('host.port');
@@ -37,7 +38,7 @@ try {
         
         const eTime = Date.now();
         const log = `请求地址：${ctx.path},请求方法：${ctx.request.method},响应时间：${eTime - sTime}ms,响应状态:${ctx.response.status}\n`;
-        console.log(log)
+        console.log(chalk.green(log))
         fs.appendFileSync('./log/app.log', log, err => {
             if(err) {
                 throw err;
@@ -51,7 +52,7 @@ try {
     app.use(apiTestRouter.routes())
 
     app.listen(port, () => {
-        console.log(`server is running at ${hostname}:${port}`);
+        console.log(chalk.green(`server is running at ${hostname}:${port}`));
         console.log(process.env.NODE_ENV);
     });
 } catch(err) {
