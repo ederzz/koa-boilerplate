@@ -44,3 +44,11 @@
 请求地址：/account/queryByid,请求方法：GET,响应时间：105ms,响应状态:200
 请求地址：/account/queryByid,请求方法：GET,响应时间：73ms,响应状态:200
 请求地址：/account/signup,请求方法：POST,响应时间：73ms,响应状态:200
+请求地址：/account/signup,请求方法：POST,响应时间：2324ms,响应状态:200
+请求地址：/account/name,请求方法：GET,响应时间：84ms,响应状态:200
+请求地址：/apiTest/time,请求方法：POST,响应时间：0ms,响应状态:404
+请求地址：/apiTest/time,请求方法：POST,响应时间：1ms,响应状态:404
+请求地址：/account/name,请求方法：GET,响应时间：60ms,响应状态:200
+请求地址：/account/name,请求方法：GET,响应时间：58ms,响应状态:200
+请求地址：/apiTest/time,请求方法：POST,响应时间：0ms,响应状态:404
+请求地址：/apiTest/time,请求方法：POST,响应时间：225ms,响应状态:200

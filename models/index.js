@@ -11,7 +11,19 @@ const accountSchema = mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('modelName', accountSchema, 'account');
+const timeSchema = mongoose.Schema({
+  time: {
+    type: Date
+  }
+})
+
+const accountModel = mongoose.models.account || mongoose.model('account', accountSchema, 'account')
+const timeModel = mongoose.models.time || mongoose.model('time', timeSchema, 'time')
+
+module.exports = {
+  accountModel,
+  timeModel
+}
 
 /**createConnection方式建立model */
 // const con = require('./db');

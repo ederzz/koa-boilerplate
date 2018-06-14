@@ -1,4 +1,4 @@
-const accountModel = require('../../models')
+const { accountModel } = require('../../models')
 const helper = require('./helper')
 
 module.exports = {

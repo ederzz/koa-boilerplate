@@ -10,6 +10,7 @@ const hostname = config.get('host.hostname');
 const port = config.get('host.port');
 const indexRouter = require('./router');
 const accountRouter = require('./router/account');
+const apiTestRouter = require('./router/apiTest')
 
 const app = new Koa();
 
@@ -36,6 +37,7 @@ try {
         
         const eTime = Date.now();
         const log = `请求地址：${ctx.path},请求方法：${ctx.request.method},响应时间：${eTime - sTime}ms,响应状态:${ctx.response.status}\n`;
+        console.log(log)
         fs.appendFileSync('./log/app.log', log, err => {
             if(err) {
                 throw err;
@@ -44,8 +46,9 @@ try {
     });
 
     /**路由 */
-    app.use(indexRouter.routes());
-    app.use(accountRouter.routes());
+    app.use(indexRouter.routes())
+    app.use(accountRouter.routes())
+    app.use(apiTestRouter.routes())
 
     app.listen(port, () => {
         console.log(`server is running at ${hostname}:${port}`);
