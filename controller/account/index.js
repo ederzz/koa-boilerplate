@@ -1,5 +1,5 @@
-const accountModel = require('../../models');
-const helper = require('./helper');
+const accountModel = require('../../models')
+const helper = require('./helper')
 
 module.exports = {
     signUp: async (ctx, next) => {
@@ -95,5 +95,36 @@ module.exports = {
             message: '数据更新成功'
         };
         return ;
+    },
+    queryAccount: async (ctx, _) => {
+        try {
+            const {
+                name
+            } = ctx.request.query
+            
+            const result = await accountModel.findOne({
+                accountName: name
+            })
+
+            ctx.body = result
+        } catch (error) {
+            throw error
+        }
+    },
+    queryById: async (ctx, _) => {
+        try {
+            const {
+                id
+            } = ctx.request.query
+
+            console.log(ObjectId(id))
+            const result = await accountModel.findById({
+                _id: id // 或者可以转换为ObjectId
+            })
+
+            ctx.body = result
+        } catch (error) {
+            throw error
+        }
     }
 }
