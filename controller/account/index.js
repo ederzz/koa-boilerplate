@@ -1,8 +1,20 @@
 const { accountModel } = require('../../models')
 const helper = require('./helper')
+const {
+    signup,
+    accountUpdate,
+    queryByName,
+    queryById
+} = require('./validate.js')
 
 module.exports = {
     signUp: async (ctx, next) => {
+        const validateRes = helper.joiValite('request body')(ctx.request.body, signup)
+        if(validateRes) {
+            ctx.body = validateRes
+            return ;
+        }
+
         const {
             accountName,
             accountPwd
@@ -39,6 +51,12 @@ module.exports = {
 
     },
     signIn: async (ctx, next) => {
+        const validateRes = helper.joiValite('request body')(ctx.request.body, signup)
+        if(validateRes) {
+            ctx.body = validateRes
+            return ;
+        }
+
         const {
             accountName,
             accountPwd
@@ -64,6 +82,12 @@ module.exports = {
 
     },
     update: async (ctx, next) => {
+        const validateRes = helper.joiValite('request body')(ctx.request.body, accountUpdate)
+        if(validateRes) {
+            ctx.body = validateRes
+            return ;
+        }
+
         const {
             accountName,
             accountPwd,
@@ -98,6 +122,12 @@ module.exports = {
     },
     queryAccount: async (ctx, _) => {
         try {
+            const validateRes = helper.joiValite('request query')(ctx.request.query, queryByName)
+            if(validateRes) {
+                ctx.body = validateRes
+                return ;
+            }
+
             const {
                 name
             } = ctx.request.query
@@ -113,11 +143,17 @@ module.exports = {
     },
     queryById: async (ctx, _) => {
         try {
+            const validateRes = helper.joiValite('request query')(ctx.request.query, queryById)
+            if(validateRes) {
+                ctx.body = validateRes
+                return ;
+            }
+
             const {
                 id
             } = ctx.request.query
 
-            console.log(ObjectId(id))
+            // console.log(ObjectId(id))
             const result = await accountModel.findById({
                 _id: id // 或者可以转换为ObjectId
             })

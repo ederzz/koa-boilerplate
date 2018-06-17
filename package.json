@@ -14,6 +14,7 @@
   "dependencies": {
     "config": "^1.30.0",
     "is-generator-function": "^1.0.7",
+    "joi": "^13.4.0",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
     "koa-nunjucks-2": "^3.0.2",
