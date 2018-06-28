@@ -37,7 +37,7 @@ try {
         await next();
         
         const eTime = Date.now();
-        const log = `请求地址：${ctx.path},请求方法：${ctx.request.method},响应时间：${eTime - sTime}ms,响应状态:${ctx.response.status}\n`;
+        const log = `请求地址：${ctx.path},请求方法：${ctx.request.method},响应时间：${eTime - sTime}ms,响应状态:${ctx.response.status}--请求时间：${new Date()}\n`;
         console.log(chalk.green(log))
         fs.appendFileSync('./log/app.log', log, err => {
             if(err) {
@@ -56,6 +56,6 @@ try {
         console.log(process.env.NODE_ENV);
     });
 } catch(err) {
-    const errorLog = `${err.name},${err.message},${err.stack}`;
-    fs.appendFileSync('./log/app.log', errorLog);
+    const errorLog = `${err.name},${err.message},${err.stack},${new Date()}`;
+    fs.appendFileSync('./log/error.log', errorLog);
 }

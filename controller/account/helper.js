@@ -10,7 +10,7 @@ const md5Encrypt = pwd => {
 /**
  * validate helper via Joi package
  * @param {String} position the validate object position
- * @returns {Function} return one function contain two arguments,checkObj --- the object need validate, schema --- joi validate schema
+ * @returns {Function} return one function contain two arguments：checkObj --- the object need validate, schema --- joi validate schema;and return one message for info or false to show validae successful
  */
 const joiValite = position => (checkObj, schema) => {
     const { error } = Joi.validate(checkObj, schema, {
