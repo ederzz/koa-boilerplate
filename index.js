@@ -6,18 +6,21 @@ const serve = require('koa-static');
 const config = require('config');
 const fs = require('fs');
 const chalk = require('chalk')
+const cors = require('koa2-cors')
 
 const hostname = config.get('host.hostname');
 const port = config.get('host.port');
 const indexRouter = require('./router');
 const accountRouter = require('./router/account');
 const apiTestRouter = require('./router/apiTest')
+const githubApiRouter = require('./router/githubApi')
+const staticDirPath = '.' + path.resolve(__dirname, '/static')
 
 const app = new Koa();
 
 try {
     /**指定静态资源目录 */
-    app.use(serve(path.resolve(__dirname, "./static")));
+    app.use(serve(staticDirPath));
 
     /**模板引擎 */
     app.use(nunjucks({
@@ -46,10 +49,14 @@ try {
         });
     });
 
+    // cors config
+    app.use(cors())
+
     /**路由 */
     app.use(indexRouter.routes())
     app.use(accountRouter.routes())
     app.use(apiTestRouter.routes())
+    app.use(githubApiRouter.routes())
 
     app.listen(port, () => {
         console.log(chalk.green(`server is running at ${hostname}:${port}`));
