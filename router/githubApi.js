@@ -2,6 +2,8 @@ const router = require('koa-router')({
     prefix: '/oauth'
 }) 
 const axios = require('axios')
+const cheerio = require('cheerio')
+const { setWith } = require('lodash')
 const { parseUrlQuery } = require('../utils')
 
 router
@@ -33,6 +35,32 @@ router
         ctx.body = ''
     }
 })
+.get('/:nickname/:format', async (ctx, _) => {
+    const {
+        nickname,
+        format
+    } = ctx.params
+    const {
+        status,
+        data
+    } = await axios.get(`https://github.com/${nickname}`)
+    const $ = cheerio.load(data)
+    const contributionsData = $('rect').get().reduce((data, rect) => {
+      // Parse contributions value
+      const value = (() => {
+        const count = $(rect).data('count');
+        if (format === 'activity') return count > 0;
+        if (format === 'count') return count;
+      })();
 
+      // Parse contributions date
+      const [year, month, day] = $(rect).data('date').split('-').map(
+        dateNum => parseInt(dateNum));
+      setWith(data, [year, month, day], value, Object);
+
+      return data;
+    }, {});
+    ctx.body = contributionsData
+})
 
 module.exports = router

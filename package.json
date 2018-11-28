@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
     "config": "^1.30.0",
     "is-generator-function": "^1.0.7",
     "joi": "^13.4.0",
@@ -22,6 +23,7 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
+    "lodash": "^4.17.11",
     "mongoose": "^5.0.9"
   },
   "devDependencies": {
