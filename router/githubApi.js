@@ -4,7 +4,7 @@ const router = require('koa-router')({
 const axios = require('axios')
 const cheerio = require('cheerio')
 const { setWith } = require('lodash')
-const { parseUrlQuery } = require('../utils')
+const { parseUrlQuery, Base64 } = require('../utils')
 
 router
 .post('/authorize', async (ctx, _) => {
