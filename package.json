@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index",
+    "start": "cross-env NODE_ENV=dev node index",
     "debug": "node --inspect index",
-    "build": "set NODE_ENV=production&& node index"
+    "build": "cross-env NODE_ENV=production node index"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +29,7 @@
     "shortid": "^2.2.14"
   },
   "devDependencies": {
-    "chalk": "^2.4.1"
+    "chalk": "^2.4.1",
+    "cross-env": "^5.2.0"
   }
 }
