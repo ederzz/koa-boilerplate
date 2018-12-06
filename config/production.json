@@ -1,6 +1,6 @@
 {
     "host": {
-        "hostname": "",
-        "port": 3001
+        "hostname": "101.132.180.254",
+        "port": 3002
     }
 }

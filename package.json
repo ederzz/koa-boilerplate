@@ -18,13 +18,15 @@
     "is-generator-function": "^1.0.7",
     "joi": "^13.4.0",
     "koa": "^2.5.0",
+    "koa-body": "^4.0.4",
     "koa-bodyparser": "^4.2.0",
     "koa-nunjucks-2": "^3.0.2",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
     "lodash": "^4.17.11",
-    "mongoose": "^5.0.9"
+    "mongoose": "^5.0.9",
+    "shortid": "^2.2.14"
   },
   "devDependencies": {
     "chalk": "^2.4.1"
