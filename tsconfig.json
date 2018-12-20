@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true, // 需要编译js文件
+    "checkJs": false,  // 报告js文件错误
+    "outDir": "./dist/",
+    "sourceMap": false,
+    "removeComments": true,
+    // "moduleResolution": "node",
+    "target": "es2017",
+    "noImplicitAny": true, // 强类型检查，false会在无法判断类型时使用any替代
+    "experimentalDecorators": true, // 有待了解
+    "lib": [
+      "es6"
+    ], // 添加需要解析的语法，否则TS会报错]
+    "module": "commonjs" // 指定生成哪个模块的代码
+    // "declaration": true, 
+    // "declarationDir": "",
+    // "baseUrl": "", 暂时不清楚
+  },
+  // "files": [], 显示指定需要编译哪些文件或者通过include和exclude指定需要包含和排除的文件
+  // "include": [
+
+  // ],
+  // "exclude": [
+
+  // ]
+}

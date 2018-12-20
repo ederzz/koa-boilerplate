@@ -28,6 +28,9 @@
     "shortid": "^2.2.14"
   },
   "devDependencies": {
+    "@types/koa": "^2.0.47",
+    "@types/koa-router": "^7.0.35",
+    "@types/node": "^10.12.18",
     "chalk": "^2.4.1",
     "cross-env": "^5.2.0"
   }

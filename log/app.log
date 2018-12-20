@@ -168,3 +168,5 @@
 请求地址：/upload/file,请求方法：POST,响应时间：1ms,响应状态:200--请求时间：Thu Dec 06 2018 18:30:09 GMT+0800 (CST)
 请求地址：/upload/file,请求方法：OPTIONS,响应时间：3ms,响应状态:204--请求时间：Thu Dec 06 2018 18:30:27 GMT+0800 (CST)
 请求地址：/upload/file,请求方法：POST,响应时间：1ms,响应状态:200--请求时间：Thu Dec 06 2018 18:30:27 GMT+0800 (CST)
+请求地址：/,请求方法：GET,响应时间：16ms,响应状态:200--请求时间：Sun Dec 16 2018 22:31:23 GMT+0800 (CST)
+请求地址：/favicon.ico,请求方法：GET,响应时间：0ms,响应状态:404--请求时间：Sun Dec 16 2018 22:31:24 GMT+0800 (CST)
