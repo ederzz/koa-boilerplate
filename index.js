@@ -72,11 +72,7 @@ try {
         const eTime = Date.now();
         const log = `请求地址：${ctx.path},请求方法：${ctx.request.method},响应时间：${eTime - sTime}ms,响应状态:${ctx.response.status}--请求时间：${new Date()}\n`;
         console.log(chalk.green(log))
-        fs.appendFileSync('./log/app.log', log, err => {
-            if(err) {
-                throw err;
-            }
-        });
+        fs.appendFileSync('./log/app.log', log);
     });
 
     // cors config
