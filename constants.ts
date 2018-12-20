@@ -1,4 +1,7 @@
-const mimeCollections = {
+const mimeCollections: {
+    imgType: Array<string>,
+    musicType: Array<string>
+} = {
     imgType: [
         'image/svg+xml',
         'image/jpeg',
@@ -19,6 +22,6 @@ const mimeCollections = {
     ]
 }
 
-module.exports = {
+export {
     mimeCollections
 }

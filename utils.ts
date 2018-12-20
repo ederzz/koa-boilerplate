@@ -145,8 +145,7 @@ var Base64 = {
     }
   }
   
-
-module.exports = {
+export {
     parseUrlQuery,
     Base64
 }

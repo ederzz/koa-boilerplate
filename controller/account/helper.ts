@@ -1,7 +1,7 @@
-const crypto = require('crypto')
-const Joi = require('joi')
+import crypto from 'crypto'
+import Joi from 'joi'
 
-const md5Encrypt = pwd => {
+const md5Encrypt = (pwd: string) => {
     const hash = crypto.createHash('md5');
     hash.update(pwd);
     return hash.digest('hex');
@@ -12,7 +12,7 @@ const md5Encrypt = pwd => {
  * @param {String} position the validate object position
  * @returns {Function} return one function contain two arguments：checkObj --- the object need validate, schema --- joi validate schema;and return one message for info or false to show validae successful
  */
-const joiValite = position => (checkObj, schema) => {
+const joiValite = (position: string) => (checkObj: object, schema: object) => {
     const { error } = Joi.validate(checkObj, schema, {
         convert: false
     })
@@ -29,7 +29,7 @@ const joiValite = position => (checkObj, schema) => {
     return false
 }
 
-module.exports = {
+export {
     md5Encrypt,
     joiValite
 }

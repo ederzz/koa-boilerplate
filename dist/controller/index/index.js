@@ -1,3 +1,4 @@
+"use strict";
 module.exports = {
     index: (ctx, next) => {
         console.log(ctx.request.header);

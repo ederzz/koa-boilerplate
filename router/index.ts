@@ -1,9 +1,10 @@
-const router = require('koa-router')();
-const fs = require('fs')
-const path = require('path')
-const filePath = path.resolve(__dirname, '../static/css/test.css')
+import router from 'koa-router';
+import fs from 'fs'
+import path from 'path'
+import homeController from '../controller/index';
 
-const homeController = require('../controller/index');
+const filePath = path.resolve(__dirname, '../static/css/test.css')
+const routerInstance = new router()
 
 /**路由前缀设置 */
 // const router = new Router({
@@ -42,7 +43,7 @@ const homeController = require('../controller/index');
 /**路由跳转 */
 // router.redirect('sign-in');
 
-router.get('/', homeController.index)
+routerInstance.get('/', homeController.index)
 .get('/query', homeController.query)
 .get('/test', homeController.test)
 .get('/param/:id', homeController.param)
@@ -53,4 +54,4 @@ router.get('/', homeController.index)
     return filePath
 })
 
-module.exports = router;
+export default routerInstance

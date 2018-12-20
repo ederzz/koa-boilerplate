@@ -1,13 +1,14 @@
-const router = require('koa-router')({
+import accountController from '../controller/account';
+import router from 'koa-router'
+const routerInstance = new router({
     prefix: '/account'
 });
-const accountController = require('../controller/account');
 
-router
+routerInstance
 .post('/signup', accountController.signUp)  // 注册
 .post('/signin', accountController.signIn)  // 登录
 .post('/reset', accountController.update)  // 修改密码
 .get('/name', accountController.queryAccount)
 .get('/queryByid', accountController.queryById)
 
-module.exports = router;
+export default routerInstance

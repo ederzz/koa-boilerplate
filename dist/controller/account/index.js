@@ -1,6 +1,8 @@
-const { accountModel } = require('../../models');
-const helper = require('./helper');
-const { signup, accountUpdate, queryByName, queryById } = require('./validate.js');
+"use strict";
+const models_1 = require("../../models");
+const helper = require("./helper");
+const validate_1 = require("./validate");
+const { signup, accountUpdate, queryByName, queryById } = validate_1.default;
 module.exports = {
     signUp: async (ctx, next) => {
         const validateRes = helper.joiValite('request body')(ctx.request.body, signup);
@@ -9,7 +11,7 @@ module.exports = {
             return;
         }
         const { accountName, accountPwd } = ctx.request.body;
-        const result = await accountModel.findOne({ accountName });
+        const result = await models_1.accountModel.findOne({ accountName });
         if (result) {
             ctx.body = {
                 status: false,
@@ -17,12 +19,12 @@ module.exports = {
             };
             return;
         }
-        const cResult = await accountModel.create({
+        const cResult = await models_1.accountModel.create({
             accountName,
             accountPwd: helper.md5Encrypt(accountPwd)
         });
         if (cResult.errors) {
-            console.errorsor('插入失败', cResult.errors);
+            console.error('插入失败', cResult.errors);
             ctx.body = {
                 status: false,
                 message: '数据插入失败'
@@ -42,7 +44,7 @@ module.exports = {
             return;
         }
         const { accountName, accountPwd } = ctx.request.body;
-        const res = await accountModel.findOne({
+        const res = await models_1.accountModel.findOne({
             accountName,
             accountPwd: helper.md5Encrypt(accountPwd)
         });
@@ -66,7 +68,7 @@ module.exports = {
             return;
         }
         const { accountName, accountPwd, newPwd } = ctx.request.body;
-        const res = await accountModel.findOne({
+        const res = await models_1.accountModel.findOne({
             accountName,
             accountPwd: helper.md5Encrypt(accountPwd)
         });
@@ -77,7 +79,7 @@ module.exports = {
             };
             return;
         }
-        const uRes = await accountModel.updateOne({ accountName }, { accountPwd: helper.md5Encrypt(newPwd) });
+        const uRes = await models_1.accountModel.updateOne({ accountName }, { accountPwd: helper.md5Encrypt(newPwd) });
         if (uRes.errors) {
             ctx.body = {
                 status: false,
@@ -99,7 +101,7 @@ module.exports = {
                 return;
             }
             const { name } = ctx.request.query;
-            const result = await accountModel.findOne({
+            const result = await models_1.accountModel.findOne({
                 accountName: name
             });
             ctx.body = result;
@@ -116,7 +118,7 @@ module.exports = {
                 return;
             }
             const { id } = ctx.request.query;
-            const result = await accountModel.findById({
+            const result = await models_1.accountModel.findById({
                 _id: id
             });
             ctx.body = result;

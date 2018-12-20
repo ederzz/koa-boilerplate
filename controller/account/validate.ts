@@ -1,6 +1,11 @@
-const Joi = require('joi')
+import Joi, { valid } from 'joi'
 
-module.exports = {
+const valiateObj: {
+    signup: any,
+    accountUpdate: any,
+    queryByName: any,
+    queryById: any
+} = {
     signup: Joi.object().keys({
         accountName: Joi.string().trim().min(1).required(),
         accountPwd: Joi.string().trim().min(1).required()
@@ -17,3 +22,5 @@ module.exports = {
         id: Joi.string().trim().min(1).required()
     }),
 }
+
+export default valiateObj

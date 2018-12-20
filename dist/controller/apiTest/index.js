@@ -1,3 +1,4 @@
+"use strict";
 const { timeModel } = require('../../models');
 module.exports = {
     genOneDocument: async (ctx, _) => {

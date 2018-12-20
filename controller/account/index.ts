@@ -1,14 +1,17 @@
-const { accountModel } = require('../../models')
-const helper = require('./helper')
+import { Context } from 'koa'
+import { accountModel } from '../../models'
+import * as helper from './helper'
+import validateObj from './validate'
+
 const {
     signup,
     accountUpdate,
     queryByName,
     queryById
-} = require('./validate.js')
+} = validateObj
 
-module.exports = {
-    signUp: async (ctx, next) => {
+export = {
+    signUp: async (ctx: Context, next: Function) => {
         const validateRes = helper.joiValite('request body')(ctx.request.body, signup)
         if(validateRes) {
             ctx.body = validateRes
@@ -37,7 +40,7 @@ module.exports = {
         });
 
         if(cResult.errors) {
-            console.errorsor('插入失败', cResult.errors);
+            console.error('插入失败', cResult.errors);
             ctx.body = {
                 status: false,
                 message: '数据插入失败'
@@ -50,7 +53,7 @@ module.exports = {
         }
 
     },
-    signIn: async (ctx, next) => {
+    signIn: async (ctx: Context, next: Function) => {
         const validateRes = helper.joiValite('request body')(ctx.request.body, signup)
         if(validateRes) {
             ctx.body = validateRes
@@ -81,7 +84,7 @@ module.exports = {
         return ;
 
     },
-    update: async (ctx, next) => {
+    update: async (ctx: Context, next: Function) => {
         const validateRes = helper.joiValite('request body')(ctx.request.body, accountUpdate)
         if(validateRes) {
             ctx.body = validateRes
@@ -120,7 +123,7 @@ module.exports = {
         };
         return ;
     },
-    queryAccount: async (ctx, _) => {
+    queryAccount: async (ctx: Context, _: Function) => {
         try {
             const validateRes = helper.joiValite('request query')(ctx.request.query, queryByName)
             if(validateRes) {
@@ -141,7 +144,7 @@ module.exports = {
             throw error
         }
     },
-    queryById: async (ctx, _) => {
+    queryById: async (ctx: Context, _: Function) => {
         try {
             const validateRes = helper.joiValite('request query')(ctx.request.query, queryById)
             if(validateRes) {

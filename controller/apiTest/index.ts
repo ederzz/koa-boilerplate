@@ -1,9 +1,11 @@
+import { Context } from 'koa'
+
 const {
     timeModel
 } = require('../../models')
 
-module.exports = {
-    genOneDocument: async (ctx, _) => {
+export = {
+    genOneDocument: async (ctx: Context, _: Function) => {
         try {
             await timeModel.create({
                 time: Date.now()

@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const parseUrlQuery = (query) => {
     const paramsArr = query.split('&');
     const reg = /^.*\=.*$/;
@@ -10,6 +12,7 @@ const parseUrlQuery = (query) => {
     });
     return obj;
 };
+exports.parseUrlQuery = parseUrlQuery;
 var Base64 = {
     _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
     encode: function (input) {
@@ -107,7 +110,4 @@ var Base64 = {
         return string;
     }
 };
-module.exports = {
-    parseUrlQuery,
-    Base64
-};
+exports.Base64 = Base64;

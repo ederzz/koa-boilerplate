@@ -1,12 +1,13 @@
-const router = require('koa-router')({
+import axios from 'axios'
+import cheerio from 'cheerio'
+import { setWith } from 'lodash'
+import router from 'koa-router'
+import { parseUrlQuery, Base64 } from '../utils'
+const routerInstance = new router({
     prefix: '/oauth'
 }) 
-const axios = require('axios')
-const cheerio = require('cheerio')
-const { setWith } = require('lodash')
-const { parseUrlQuery, Base64 } = require('../utils')
 
-router
+routerInstance
 .post('/authorize', async (ctx, _) => {
     const { code } = ctx.request.body
     const {
@@ -55,7 +56,7 @@ router
 
       // Parse contributions date
       const [year, month, day] = $(rect).data('date').split('-').map(
-        dateNum => parseInt(dateNum));
+        (dateNum: string) => parseInt(dateNum));
       setWith(data, [year, month, day], value, Object);
 
       return data;
@@ -63,4 +64,4 @@ router
     ctx.body = contributionsData
 })
 
-module.exports = router
+export default routerInstance
