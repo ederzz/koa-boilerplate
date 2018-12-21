@@ -1,5 +1,5 @@
-import crypto from 'crypto'
-import Joi from 'joi'
+import * as crypto from 'crypto'
+import * as Joi from 'joi'
 
 const md5Encrypt = (pwd: string) => {
     const hash = crypto.createHash('md5');

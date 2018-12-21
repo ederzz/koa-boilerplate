@@ -1,9 +1,10 @@
+import * as cheerio from 'cheerio'
+import * as Router from 'koa-router'
 import axios from 'axios'
-import cheerio from 'cheerio'
 import { setWith } from 'lodash'
-import router from 'koa-router'
 import { parseUrlQuery, Base64 } from '../utils'
-const routerInstance = new router({
+
+const routerInstance = new Router({
     prefix: '/oauth'
 }) 
 

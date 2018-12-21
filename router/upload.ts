@@ -1,12 +1,12 @@
-import config from 'config'
+import config = require('config')
 const hostname = config.get('host.hostname')
 const port = config.get('host.port')
-import router from 'koa-router'
-const routerInstance = new router({
+import * as Router from 'koa-router'
+const router = new Router({
     prefix: '/upload'
 })
 
-routerInstance.post('/file', (ctx, _) => {
+router.post('/file', (ctx, _) => {
     const {
         files: {
             file: {
@@ -21,4 +21,4 @@ routerInstance.post('/file', (ctx, _) => {
     }
 })
 
-export default routerInstance
+export default router

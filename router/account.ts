@@ -1,6 +1,6 @@
-import accountController from '../controller/account';
-import router from 'koa-router'
-const routerInstance = new router({
+import accountController from '../controller/account'
+import * as Router from 'koa-router'
+const routerInstance = new Router({
     prefix: '/account'
 });
 

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const account_1 = require("../controller/account");
-const koa_router_1 = require("koa-router");
-const routerInstance = new koa_router_1.default({
+const Router = require("koa-router");
+const routerInstance = new Router({
     prefix: '/account'
 });
 routerInstance

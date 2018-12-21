@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const cheerio = require("cheerio");
+const Router = require("koa-router");
 const axios_1 = require("axios");
-const cheerio_1 = require("cheerio");
 const lodash_1 = require("lodash");
-const koa_router_1 = require("koa-router");
 const utils_1 = require("../utils");
-const routerInstance = new koa_router_1.default({
+const routerInstance = new Router({
     prefix: '/oauth'
 });
 routerInstance
@@ -35,7 +35,7 @@ routerInstance
     .get('/:nickname/:format', async (ctx, _) => {
     const { nickname, format } = ctx.params;
     const { status, data } = await axios_1.default.get(`https://github.com/${nickname}`);
-    const $ = cheerio_1.default.load(data);
+    const $ = cheerio.load(data);
     const contributionsData = $('rect').get().reduce((data, rect) => {
         const value = (() => {
             const count = $(rect).data('count');

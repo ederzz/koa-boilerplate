@@ -10,7 +10,7 @@ const {
     queryById
 } = validateObj
 
-export = {
+export default {
     signUp: async (ctx: Context, next: Function) => {
         const validateRes = helper.joiValite('request body')(ctx.request.body, signup)
         if(validateRes) {

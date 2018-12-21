@@ -1,6 +1,6 @@
 import controller from '../controller/apiTest'
-import router from 'koa-router'
-const routerInstance = new router({
+import * as Router from 'koa-router'
+const routerInstance = new Router({
     prefix: '/apiTest'
 }) 
 

@@ -4,7 +4,7 @@ const {
     timeModel
 } = require('../../models')
 
-export = {
+export default {
     genOneDocument: async (ctx: Context, _: Function) => {
         try {
             await timeModel.create({

@@ -1,6 +1,7 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const { timeModel } = require('../../models');
-module.exports = {
+exports.default = {
     genOneDocument: async (ctx, _) => {
         try {
             await timeModel.create({

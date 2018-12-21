@@ -1,9 +1,10 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const models_1 = require("../../models");
 const helper = require("./helper");
 const validate_1 = require("./validate");
 const { signup, accountUpdate, queryByName, queryById } = validate_1.default;
-module.exports = {
+exports.default = {
     signUp: async (ctx, next) => {
         const validateRes = helper.joiValite('request body')(ctx.request.body, signup);
         if (validateRes) {
