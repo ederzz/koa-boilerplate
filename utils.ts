@@ -145,7 +145,7 @@ var Base64 = {
     }
   }
   
-export {
+export default {
     parseUrlQuery,
     Base64
 }

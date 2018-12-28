@@ -1,7 +1,7 @@
-import * as Router from 'koa-router';
+import * as Router from 'koa-router'
 import * as fs from 'fs'
 import * as path from 'path'
-// import * as homeController from '../controller/index';
+import * as homeController from '../controller/index'
 
 const filePath = path.resolve(__dirname, '../static/css/test.css')
 const router = new Router()
@@ -43,18 +43,17 @@ const router = new Router()
 /**路由跳转 */
 // router.redirect('sign-in');
 
-// routerInstance.get('/', homeController.index)
-// .get('/query', homeController.query)
-// .get('/test', homeController.test)
-// .get('/param/:id', homeController.param)
-// .post('/user', homeController.addUser)
-// .all('/test', homeController.all)
-// .get('/static', async (ctx, _) => {
-//     ctx.body = fs.readFileSync(filePath)
-//     return filePath
-// })
 router.get('/', async (ctx, _) => {
     ctx.body = 'test'
+})
+.get('/query', homeController.query)
+.get('/test', homeController.test)
+.get('/param/:id', homeController.param)
+.post('/user', homeController.addUser)
+.all('/test', homeController.all)
+.get('/static', async (ctx, _) => {
+    ctx.body = fs.readFileSync(filePath)
+    return filePath
 })
 
 export default router

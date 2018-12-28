@@ -7,7 +7,6 @@ const md5Encrypt = (pwd) => {
     hash.update(pwd);
     return hash.digest('hex');
 };
-exports.md5Encrypt = md5Encrypt;
 const joiValite = (position) => (checkObj, schema) => {
     const { error } = Joi.validate(checkObj, schema, {
         convert: false
@@ -18,4 +17,7 @@ const joiValite = (position) => (checkObj, schema) => {
     }
     return false;
 };
-exports.joiValite = joiValite;
+exports.default = {
+    md5Encrypt,
+    joiValite
+};

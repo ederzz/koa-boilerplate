@@ -2,13 +2,15 @@ import * as cheerio from 'cheerio'
 import * as Router from 'koa-router'
 import axios from 'axios'
 import { setWith } from 'lodash'
-import { parseUrlQuery, Base64 } from '../utils'
+import utils from '../utils'
 
-const routerInstance = new Router({
+const { parseUrlQuery, Base64 } = utils
+
+const router = new Router({
     prefix: '/oauth'
 }) 
 
-routerInstance
+router
 .post('/authorize', async (ctx, _) => {
     const { code } = ctx.request.body
     const {
@@ -65,4 +67,4 @@ routerInstance
     ctx.body = contributionsData
 })
 
-export default routerInstance
+export default router

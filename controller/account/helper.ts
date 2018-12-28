@@ -29,7 +29,7 @@ const joiValite = (position: string) => (checkObj: object, schema: object) => {
     return false
 }
 
-export {
+export default {
     md5Encrypt,
     joiValite
 }

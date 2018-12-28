@@ -5,10 +5,11 @@ const Router = require("koa-router");
 const axios_1 = require("axios");
 const lodash_1 = require("lodash");
 const utils_1 = require("../utils");
-const routerInstance = new Router({
+const { parseUrlQuery, Base64 } = utils_1.default;
+const router = new Router({
     prefix: '/oauth'
 });
-routerInstance
+router
     .post('/authorize', async (ctx, _) => {
     const { code } = ctx.request.body;
     const { status, data } = await axios_1.default.post('https://github.com/login/oauth/access_token', {
@@ -17,7 +18,7 @@ routerInstance
         code
     });
     if (status === 200) {
-        ctx.body = utils_1.parseUrlQuery(data);
+        ctx.body = parseUrlQuery(data);
     }
     else {
         ctx.body = {};
@@ -50,4 +51,4 @@ routerInstance
     }, {});
     ctx.body = contributionsData;
 });
-exports.default = routerInstance;
+exports.default = router;

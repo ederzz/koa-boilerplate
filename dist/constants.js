@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const mimeCollections = {
+exports.mimeCollections = {
     imgType: [
         'image/svg+xml',
         'image/jpeg',
@@ -20,4 +20,3 @@ const mimeCollections = {
         'audio/flac'
     ]
 };
-exports.mimeCollections = mimeCollections;

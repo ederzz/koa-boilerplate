@@ -4,16 +4,14 @@ const {
     timeModel
 } = require('../../models')
 
-export default {
-    genOneDocument: async (ctx: Context, _: Function) => {
-        try {
-            await timeModel.create({
-                time: Date.now()
-            })
+export const genOneDocument = async (ctx: Context, _: Function) => {
+    try {
+        await timeModel.create({
+            time: Date.now()
+        })
 
-            ctx.body = '创建成功'
-        } catch (error) {
-            throw error
-        }
+        ctx.body = '创建成功'
+    } catch (error) {
+        throw error
     }
 }

@@ -1,9 +1,9 @@
-import controller from '../controller/apiTest'
+import * as controller from '../controller/apiTest'
 import * as Router from 'koa-router'
-const routerInstance = new Router({
+const router = new Router({
     prefix: '/apiTest'
 }) 
 
-routerInstance.post('/time', controller.genOneDocument)
+router.post('/time', controller.genOneDocument)
 
-export default routerInstance
+export default router

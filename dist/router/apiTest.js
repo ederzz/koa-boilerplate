@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const apiTest_1 = require("../controller/apiTest");
+const controller = require("../controller/apiTest");
 const Router = require("koa-router");
-const routerInstance = new Router({
+const router = new Router({
     prefix: '/apiTest'
 });
-routerInstance.post('/time', apiTest_1.default.genOneDocument);
-exports.default = routerInstance;
+router.post('/time', controller.genOneDocument);
+exports.default = router;

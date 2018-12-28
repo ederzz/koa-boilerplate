@@ -12,7 +12,6 @@ const parseUrlQuery = (query) => {
     });
     return obj;
 };
-exports.parseUrlQuery = parseUrlQuery;
 var Base64 = {
     _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
     encode: function (input) {
@@ -110,4 +109,7 @@ var Base64 = {
         return string;
     }
 };
-exports.Base64 = Base64;
+exports.default = {
+    parseUrlQuery,
+    Base64
+};

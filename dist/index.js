@@ -2,18 +2,58 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Koa = require("koa");
 const fs = require("fs");
+const path = require("path");
+const bodyParser = require("koa-body");
+const serve = require("koa-static");
 const config = require("config");
 const cors = require("koa2-cors");
+const shortid = require("shortid");
 const chalk_1 = require("chalk");
+const koa_nunjucks_2_1 = require("koa-nunjucks-2");
 const router_1 = require("./router");
 const account_1 = require("./router/account");
 const apiTest_1 = require("./router/apiTest");
 const githubApi_1 = require("./router/githubApi");
 const upload_1 = require("./router/upload");
+const constants_1 = require("./constants");
 const hostname = config.get('host.hostname');
 const port = config.get('host.port');
+const staticDirPath = '.' + path.resolve(__dirname, '/static');
 const app = new Koa();
 try {
+    app.use(serve(staticDirPath));
+    app.use(koa_nunjucks_2_1.default({
+        ext: 'html',
+        path: path.join(__dirname, 'views'),
+        nunjucksConfig: {
+            trimBlocks: true
+        }
+    }));
+    app.use(bodyParser({
+        formidable: {
+            uploadDir: __dirname + '/static',
+            keepExtensions: true,
+            onFileBegin(_, file) {
+                const { path: filePath, type } = file;
+                const paths = filePath.split('/');
+                const suffixReg = /^(.*)(\..*)$/;
+                const suffix = suffixReg.exec(paths[paths.length - 1])[2];
+                let dirName;
+                if (constants_1.mimeCollections.imgType.includes(type)) {
+                    dirName = 'imgs';
+                }
+                else if (constants_1.mimeCollections.musicType.includes(type)) {
+                    dirName = 'music';
+                }
+                else {
+                    return null;
+                }
+                file.path = path.resolve(paths.slice(0, -1).join('/'), dirName, `${shortid.generate()}${suffix}`);
+            }
+        },
+        multipart: true,
+        urlencoded: true
+    }));
     app.use(async (ctx, next) => {
         const sTime = Date.now();
         await next();

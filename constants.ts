@@ -1,4 +1,4 @@
-const mimeCollections: {
+export const mimeCollections: {
     imgType: Array<string>,
     musicType: Array<string>
 } = {
@@ -20,8 +20,4 @@ const mimeCollections: {
         'audio/wav',
         'audio/flac'
     ]
-}
-
-export {
-    mimeCollections
 }
