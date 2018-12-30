@@ -1,1 +1,1 @@
- - 如何打包非ts文件目录：日志目录，模板文件目录
+ - tsconfig.js添加了allowSyntheticDefaultImports选项，使用默认导入仍然会失败

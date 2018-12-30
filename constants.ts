@@ -1,7 +1,10 @@
-export const mimeCollections: {
+interface IMimeCollections {
     imgType: Array<string>,
     musicType: Array<string>
-} = {
+}
+
+// mime type
+export const mimeCollections: IMimeCollections = {
     imgType: [
         'image/svg+xml',
         'image/jpeg',

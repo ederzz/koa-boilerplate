@@ -1,25 +1,15 @@
-### koa-iintroduction
-一个koa项目，搭配各种koa插件，使用mongoDB作数据库存储(本地数据库名称为`koaIntroduction`,你也可以到config文件夹下面的配置文件进行查看),使用[config](https://www.npmjs.com/package/config)作项目配置
+#### 项目命令说明
+ - `npm start`：编译`ts`文件并运行
+ - `npm run build`： 编译`ts`文件
+ - `npm run ts_node`：通过`ts node`运行项目，`--files`是为了启动时加载`tsconfig.json`里的文件，默认是不加载的，这意味着你在`tsconfig.json`中配置的一些`.d.ts`会失效，编译时会报`can't find module xxx`等错误
+ - `npm run dev`： 通过`nodemon`监听`ts`文件改变，并重新编译运行
 
- - 使用`koa-router`进行路由处理
- - 使用`koa-bodyparser`解析`post`请求`body`内容
- - 使用`koa-nunjucks-2`作为模板引擎
- - 使用`koa-static`进行处理静态文件
- - 使用`mongoose`链接`mongoDB`数据库
- - 使用`config`模块管理配置文件
- - 使用`joi`作接口参数验证
-
-### 项目目录结构
- ```
-├─config                    配置文件
-├─controller                具体的路由处理函数
-│  ├─account
-│  └─index
-├─models                    数据库模型
-├─router                    路由处理
-├─static                    静态文件
-│  └─css
-├─views                     html模板
-└─index.js                  程序入口                     
- ```
-
+#### `nodemon.json`配置文件说明
+```Typescript
+{
+    "ignore": ["**/*.test.ts", "**/*.spec.ts", ".git", "node_modules"], // 忽略监听文件
+    "watch": ["."], // 监听目录
+    "exec": "npm start", // 监听变化后执行npm start命令
+    "ext": "ts" // 监听ts文件
+}
+```

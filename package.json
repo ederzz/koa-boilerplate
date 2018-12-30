@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=dev node index",
-    "debug": "node --inspect index",
-    "build": "cross-env NODE_ENV=production node index",
-    "build_dev": "cp -r ./views/ ./dist/views && cp -r ./log/ ./dist/log && tsc"
+    "start": "cp -r ./views/ ./dist/views && cp -r ./log/ ./dist/log && tsc && node dist/index.js",
+    "build": "cp -r ./views/ ./dist/views && cp -r ./log/ ./dist/log && tsc",
+    "ts_node": "ts-node --files index.ts",
+    "dev": "npx nodemon"
   },
   "author": "",
   "license": "ISC",
@@ -40,6 +39,9 @@
     "@types/node": "^10.12.18",
     "@types/shortid": "^0.0.29",
     "chalk": "^2.4.1",
-    "cross-env": "^5.2.0"
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.18.9",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   }
 }
