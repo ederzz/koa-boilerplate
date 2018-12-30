@@ -20,5 +20,5 @@ router.post('/file', (ctx, _) => {
         uploadPath: `${hostname}:${port}/${reg.exec(path)[1]}`
     }
 })
-
+// TODO 上传，postman如何测试上传
 export default router

@@ -13,7 +13,6 @@ router.get('/', async (ctx, _) => {
     .get('/test', homeController.test)
     .get('/param/:id', homeController.param)
     .post('/user', homeController.addUser)
-    .all('/test', homeController.all)
     .get('/static', async (ctx, _) => {
     ctx.body = fs.readFileSync(filePath);
     return filePath;

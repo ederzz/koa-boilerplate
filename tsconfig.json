@@ -22,7 +22,6 @@
   "includes": [
     "./externals.d.js"
   ]
-  // "files": [], 显示指定需要编译哪些文件或者通过include和exclude指定需要包含和排除的文件
   // "include": [
 
   // ],

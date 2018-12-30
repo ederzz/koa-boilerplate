@@ -8,21 +8,20 @@ const serve = require("koa-static");
 const config = require("config");
 const cors = require("koa2-cors");
 const shortid = require("shortid");
+const nunjucks = require("koa-nunjucks-2");
 const chalk_1 = require("chalk");
-const koa_nunjucks_2_1 = require("koa-nunjucks-2");
 const router_1 = require("./router");
-const account_1 = require("./router/account");
 const apiTest_1 = require("./router/apiTest");
-const githubApi_1 = require("./router/githubApi");
-const upload_1 = require("./router/upload");
 const constants_1 = require("./constants");
 const hostname = config.get('host.hostname');
 const port = config.get('host.port');
 const staticDirPath = '.' + path.resolve(__dirname, '/static');
+const logFilePath = path.resolve(__dirname, 'log/app.log');
+const errorFilePath = path.resolve(__dirname, 'log/error.log');
 const app = new Koa();
 try {
     app.use(serve(staticDirPath));
-    app.use(koa_nunjucks_2_1.default({
+    app.use(nunjucks({
         ext: 'html',
         path: path.join(__dirname, 'views'),
         nunjucksConfig: {
@@ -60,14 +59,11 @@ try {
         const eTime = Date.now();
         const log = `请求地址：${ctx.path},请求方法：${ctx.request.method},响应时间：${eTime - sTime}ms,响应状态:${ctx.response.status}--请求时间：${new Date()}\n`;
         console.log(chalk_1.default.green(log));
-        fs.appendFileSync('./log/app.log', log);
+        fs.appendFileSync(logFilePath, log);
     });
     app.use(cors());
     app.use(router_1.default.routes());
-    app.use(account_1.default.routes());
     app.use(apiTest_1.default.routes());
-    app.use(githubApi_1.default.routes());
-    app.use(upload_1.default.routes());
     app.listen(port, () => {
         console.log(chalk_1.default.green(`server is running at ${hostname}:${port}`));
         console.log(process.env.NODE_ENV);
@@ -75,5 +71,5 @@ try {
 }
 catch (err) {
     const errorLog = `${err.name},${err.message},${err.stack},${new Date()}`;
-    fs.appendFileSync('./log/error.log', errorLog);
+    fs.appendFileSync(errorFilePath, errorLog);
 }

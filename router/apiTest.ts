@@ -4,6 +4,6 @@ const router = new Router({
     prefix: '/apiTest'
 }) 
 
-router.post('/time', controller.genOneDocument)
+router.post('/time', controller.genOneDocument) // TODO 数据库连接
 
 export default router
