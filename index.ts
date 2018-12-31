@@ -26,7 +26,7 @@ const mongooseStart = new MongooseStart()
 mongooseStart.setUpDb()
 
 const app = new Koa()
-// TODO 如何做到没有目录直接创建
+
 try {
     /**指定静态资源目录 */
     app.use(serve(staticDirPath))
