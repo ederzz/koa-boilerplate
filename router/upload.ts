@@ -1,7 +1,8 @@
 import config = require('config')
-const hostname = config.get('host.hostname')
-const port = config.get('host.port')
 import * as Router from 'koa-router'
+
+const hostname: string = config.get('host.hostname')
+const port: number = config.get('host.port')
 const router = new Router({
     prefix: '/upload'
 })
@@ -14,8 +15,8 @@ router.post('/file', (ctx, _) => {
             }
         }
     } = ctx.request
-    const reg = /^.*koa-introduction\/static\/(.*)$/
-    
+
+    const reg: RegExp = /^.*koa-introduction\/static\/(.*)$/
     ctx.body = {
         uploadPath: `${hostname}:${port}/${reg.exec(path)[1]}`
     }

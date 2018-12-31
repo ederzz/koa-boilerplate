@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const config = require("config");
+const Router = require("koa-router");
 const hostname = config.get('host.hostname');
 const port = config.get('host.port');
-const Router = require("koa-router");
 const router = new Router({
     prefix: '/upload'
 });

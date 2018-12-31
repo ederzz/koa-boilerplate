@@ -11,4 +11,4 @@ RUN npm install
 # 暴露3002端口
 EXPOSE 3002
 # 程序启动
-CMD ["node", "index"]
+CMD ["npm", "start"]

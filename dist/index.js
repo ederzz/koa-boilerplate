@@ -11,13 +11,18 @@ const shortid = require("shortid");
 const nunjucks = require("koa-nunjucks-2");
 const chalk_1 = require("chalk");
 const router_1 = require("./router");
+const account_1 = require("./router/account");
 const apiTest_1 = require("./router/apiTest");
+const githubApi_1 = require("./router/githubApi");
 const constants_1 = require("./constants");
+const db_1 = require("./models/db");
 const hostname = config.get('host.hostname');
 const port = config.get('host.port');
 const staticDirPath = '.' + path.resolve(__dirname, '/static');
 const logFilePath = path.resolve(__dirname, 'log/app.log');
 const errorFilePath = path.resolve(__dirname, 'log/error.log');
+const mongooseStart = new db_1.default();
+mongooseStart.setUpDb();
 const app = new Koa();
 try {
     app.use(serve(staticDirPath));
@@ -63,7 +68,9 @@ try {
     });
     app.use(cors());
     app.use(router_1.default.routes());
+    app.use(account_1.default.routes());
     app.use(apiTest_1.default.routes());
+    app.use(githubApi_1.default.routes());
     app.listen(port, () => {
         console.log(chalk_1.default.green(`server is running at ${hostname}:${port}`));
         console.log(process.env.NODE_ENV);

@@ -4,8 +4,15 @@ import axios from 'axios'
 import { setWith } from 'lodash'
 import utils from '../utils'
 
-const { parseUrlQuery, Base64 } = utils
+type Month = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12'
+interface MonthContributions {
+    [k: string]: boolean | number
+}
+interface Contributions {
+    [k: string]: Record<Month, MonthContributions>
+}
 
+const { parseUrlQuery, Base64 } = utils
 const router = new Router({
     prefix: '/oauth'
 }) 
@@ -48,10 +55,10 @@ router
         status,
         data
     } = await axios.get(`https://github.com/${nickname}`)
-    const $ = cheerio.load(data)
-    const contributionsData = $('rect').get().reduce((data, rect) => {
+    const $: CheerioStatic = cheerio.load(data)
+    const contributionsData: Contributions = $('rect').get().reduce((data, rect) => {
       // Parse contributions value
-      const value = (() => {
+      const value: string | boolean = (() => {
         const count = $(rect).data('count');
         if (format === 'activity') return count > 0;
         if (format === 'count') return count;

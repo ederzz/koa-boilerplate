@@ -36,6 +36,8 @@
     "@types/koa-static": "^4.0.0",
     "@types/koa2-cors": "^2.0.1",
     "@types/lodash": "^4.14.119",
+    "@types/mongodb": "^3.1.18",
+    "@types/mongoose": "^5.3.5",
     "@types/node": "^10.12.18",
     "@types/shortid": "^0.0.29",
     "chalk": "^2.4.1",

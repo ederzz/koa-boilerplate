@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as homeController from '../controller/index'
 
-const filePath = path.resolve(__dirname, '../static/css/test.css')
+const filePath: string = path.resolve(__dirname, '../static/css/test.css')
 const router = new Router()
 
 /**路由前缀设置 */

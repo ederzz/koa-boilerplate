@@ -15,12 +15,15 @@ import apiTestRouter from './router/apiTest'
 import githubApiRouter from './router/githubApi'
 import uploadRouter from './router/upload'
 import { mimeCollections } from './constants'
+import MongooseStart from './models/db'
 
 const hostname: string = config.get('host.hostname')
 const port: number = config.get('host.port')
 const staticDirPath: string = '.' + path.resolve(__dirname, '/static')
 const logFilePath: string = path.resolve(__dirname, 'log/app.log') // log文件路径
 const errorFilePath: string = path.resolve(__dirname, 'log/error.log') // 错误日志文件路径
+const mongooseStart = new MongooseStart()
+mongooseStart.setUpDb()
 
 const app = new Koa()
 // TODO 如何做到没有目录直接创建
@@ -85,9 +88,9 @@ try {
 
     /**路由 */
     app.use(indexRouter.routes())
-    // app.use(accountRouter.routes())
+    app.use(accountRouter.routes())
     app.use(apiTestRouter.routes())
-    // app.use(githubApiRouter.routes())
+    app.use(githubApiRouter.routes())
     // app.use(uploadRouter.routes())
 
     app.listen(port, () => {
