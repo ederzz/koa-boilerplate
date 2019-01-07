@@ -1,3 +1,7 @@
+const bcrypt = require('bcrypt')
+const config = require('config')
+
+const saltRounds = config.get('saltRounds') // 加密强度
 const { accountModel } = require('../../models')
 const helper = require('./helper')
 const {
@@ -30,10 +34,11 @@ module.exports = {
             };
             return ;
         }
-
+        
+        const hashPwd = await bcrypt.hash(accountPwd, saltRounds)
         const cResult = await accountModel.create({
             accountName,
-            accountPwd: helper.md5Encrypt(accountPwd)
+            accountPwd: hashPwd
         });
 
         if(cResult.errors) {

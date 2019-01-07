@@ -12,5 +12,6 @@
     "host": {
         "hostname": "localhost",
         "port": 3002
-    }
+    },
+    "saltRounds": 10
 }
