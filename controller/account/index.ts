@@ -1,9 +1,13 @@
-import { query } from './../index/index';
+import * as bcrypt from 'bcrypt'
+import * as config from 'config'
 import { Context } from 'koa'
+
 import { accountModel } from '../../models'
+import { query } from './../index/index'
 import helper from './helper'
 import validateObj from './validate'
 
+const saltRounds: number = config.get('saltRounds')
 const {
     signup,
     accountUpdate,
@@ -34,9 +38,10 @@ export const signUp = async (ctx: Context, next: Function) => {
         return ;
     }
 
+    const hashPwd: string = await bcrypt.hash(accountPwd, saltRounds)
     const cResult = await accountModel.create({
         accountName,
-        accountPwd: helper.md5Encrypt(accountPwd)
+        accountPwd: hashPwd
     });
 
     if(cResult.errors) {

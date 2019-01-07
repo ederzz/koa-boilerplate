@@ -1,8 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const bcrypt = require("bcrypt");
+const config = require("config");
 const models_1 = require("../../models");
 const helper_1 = require("./helper");
 const validate_1 = require("./validate");
+const saltRounds = config.get('saltRounds');
 const { signup, accountUpdate, queryByName, queryById: queryByIdValidate } = validate_1.default;
 exports.signUp = async (ctx, next) => {
     const validateRes = helper_1.default.joiValite('request body')(ctx.request.body, signup);
@@ -19,9 +22,10 @@ exports.signUp = async (ctx, next) => {
         };
         return;
     }
+    const hashPwd = await bcrypt.hash(accountPwd, saltRounds);
     const cResult = await models_1.accountModel.create({
         accountName,
-        accountPwd: helper_1.default.md5Encrypt(accountPwd)
+        accountPwd: hashPwd
     });
     if (cResult.errors) {
         console.error('插入失败', cResult.errors);
