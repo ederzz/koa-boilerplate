@@ -31,6 +31,17 @@ app.use(async (ctx, next) => {
     }
 })
 
+// request log
+app.use(async (ctx, next) => {
+    const sTime = Date.now();
+    await next();
+    
+    const eTime = Date.now();
+    const log = `请求地址：${ctx.path},请求方法：${ctx.request.method},响应时间：${eTime - sTime}ms,响应状态:${ctx.response.status}--请求时间：${new Date()}\n`;
+    console.log(chalk.green(log))
+    fs.appendFileSync('./log/app.log', log);
+});
+
 /**指定静态资源目录 */
 app.use(serve(staticDirPath));
 
@@ -72,17 +83,6 @@ app.use(bodyParser({
     multipart: true,
     urlencoded: true
 }))
-
-/**每次http请求都会通过app.use使用中间件 */
-app.use(async (ctx, next) => {
-    const sTime = Date.now();
-    await next();
-    
-    const eTime = Date.now();
-    const log = `请求地址：${ctx.path},请求方法：${ctx.request.method},响应时间：${eTime - sTime}ms,响应状态:${ctx.response.status}--请求时间：${new Date()}\n`;
-    console.log(chalk.green(log))
-    fs.appendFileSync('./log/app.log', log);
-});
 
 // cors config
 app.use(cors())
