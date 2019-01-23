@@ -11,18 +11,10 @@ const accountSchema = mongoose.Schema({
   }
 })
 
-const timeSchema = mongoose.Schema({
-  time: {
-    type: Date
-  }
-})
-
 const accountModel = mongoose.models.account || mongoose.model('account', accountSchema, 'account')
-const timeModel = mongoose.models.time || mongoose.model('time', timeSchema, 'time')
 
 module.exports = {
-  accountModel,
-  timeModel
+  accountModel
 }
 
 /**createConnection方式建立model */

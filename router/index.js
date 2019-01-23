@@ -5,15 +5,15 @@ const filePath = path.resolve(__dirname, '../static/css/test.css')
 
 const homeController = require('../controller/index');
 
-/**路由前缀设置 */
+// 路由前缀设置
 // const router = new Router({
 //     prefix: '/user'
 // });
 
-/**路由命名 */
+// 路由命名
 // router.url('user'); => 路由： /user
 
-/**多个中间件 */
+// 多个中间件
 // router.get(
 //     '/users/:id',
 //     (ctx, next) => {
@@ -28,7 +28,7 @@ const homeController = require('../controller/index');
 //     }
 // );
 
-/**路由嵌套 */
+// 路由嵌套
 // const forums = new Router();
 // const posts = new Router();
  
@@ -39,7 +39,7 @@ const homeController = require('../controller/index');
 // // responds to "/forums/123/posts" and "/forums/123/posts/123"
 // app.use(forums.routes());
 
-/**路由跳转 */
+// 路由跳转
 // router.redirect('sign-in');
 
 router.get('/', homeController.index)

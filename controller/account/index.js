@@ -27,7 +27,7 @@ module.exports = {
         const result = await accountModel.findOne({ accountName });
 
         if(result) {
-            /**数据库中已存在该账户名 */
+            // 数据库中已存在该账户名
             ctx.body = {
                 status: false,
                 message: '已存在该用户名'
