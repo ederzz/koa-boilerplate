@@ -1,10 +1,10 @@
 {
-  "name": "koa-introduction",
+  "name": "koa-boilerplate",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "cross-env NODE_ENV=dev node index",
     "debug": "node --inspect index",
     "build": "cross-env NODE_ENV=production node index",
@@ -30,8 +30,11 @@
     "shortid": "^2.2.14"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "chalk": "^2.4.1",
     "cross-env": "^5.2.0",
-    "nodemon": "^1.18.9"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9",
+    "supertest": "^3.4.2"
   }
 }

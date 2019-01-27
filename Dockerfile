@@ -7,8 +7,12 @@ ADD . /koa-introduction/
 # 进入到koa-introduction目录下面，类似cd
 WORKDIR /koa-introduction
 # 安装依赖
-RUN npm install
+RUN apk update && apk upgrade \
+	&& apk add --no-cache git \
+	&& apk --no-cache add --virtual builds-deps build-base python \
+	&& npm install\
+	&& npm rebuild bcrypt --build-from-source
 # 暴露3002端口
 EXPOSE 3002
 # 程序启动
-CMD ["node", "index"]
+CMD ["npm", "start"]

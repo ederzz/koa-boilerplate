@@ -16,33 +16,33 @@ module.exports = {
         const validateRes = helper.joiValite('request body')(ctx.request.body, signup)
         if(validateRes) {
             ctx.body = validateRes
-            return ;
+            return 
         }
 
         const {
             accountName,
             accountPwd
-        } = ctx.request.body;
+        } = ctx.request.body
 
-        const result = await accountModel.findOne({ accountName });
+        const result = await accountModel.findOne({ accountName })
 
         if(result) {
             // 数据库中已存在该账户名
             ctx.body = {
                 status: false,
                 message: '已存在该用户名'
-            };
-            return ;
+            }
+            return 
         }
         
         const hashPwd = await bcrypt.hash(accountPwd, saltRounds)
         const cResult = await accountModel.create({
             accountName,
             accountPwd: hashPwd
-        });
+        })
 
         if(cResult.errors) {
-            console.errorsor('插入失败', cResult.errors);
+            console.errorsor('插入失败', cResult.errors)
             ctx.body = {
                 status: false,
                 message: '数据插入失败'
@@ -51,7 +51,7 @@ module.exports = {
             ctx.body = {
                 status: true,
                 message: '数据插入成功'
-            };
+            }
         }
 
     },
@@ -59,78 +59,75 @@ module.exports = {
         const validateRes = helper.joiValite('request body')(ctx.request.body, signup)
         if(validateRes) {
             ctx.body = validateRes
-            return ;
+            return 
         }
 
         const {
             accountName,
             accountPwd
-        } = ctx.request.body;
+        } = ctx.request.body
 
         const res = await accountModel.findOne({
-            accountName,
-            accountPwd: helper.md5Encrypt(accountPwd)
-        });
-
-        if(!res) {
+            accountName
+        })
+        if (bcrypt.compareSync(accountPwd, res.accountPwd)) {
             ctx.body = {
-                status: false,
-                message: '用户名或密码出错'
-            };
-            return ;
+                status: true,
+                message: '登录成功'
+            }
+            return 
         }
         ctx.body = {
-            status: true,
-            message: '登录成功'
-        };
-        return ;
-
+            status: false,
+            message: '用户名或密码出错'
+        }
+        return
     },
     update: async (ctx, next) => {
         const validateRes = helper.joiValite('request body')(ctx.request.body, accountUpdate)
         if(validateRes) {
             ctx.body = validateRes
-            return ;
+            return 
         }
 
         const {
             accountName,
             accountPwd,
             newPwd
-        } = ctx.request.body;
+        } = ctx.request.body
 
         const res = await accountModel.findOne({
-            accountName,
-            accountPwd: helper.md5Encrypt(accountPwd)
-        });
+            accountName
+        })
 
-        if(!res) {
+        if(!bcrypt.compareSync(accountPwd, res.accountPwd)) {
             ctx.body = {
                 status: false,
                 message: '用户名或密码出错'
-            };
-            return ;
+            }
+            return 
         }
-        const uRes = await accountModel.updateOne({ accountName }, { accountPwd: helper.md5Encrypt(newPwd) });
+        const hashPwd = await bcrypt.hash(newPwd, saltRounds)
+        const uRes = await accountModel.updateOne({ accountName }, { accountPwd: hashPwd })
         if(uRes.errors) {
             ctx.body = {
                 status: false,
                 message: '更新失败'
-            };
-            return ;
+            }
+            return 
         }
         ctx.body = {
             status: true,
             message: '数据更新成功'
-        };
-        return ;
+        }
+        return 
     },
     queryAccount: async (ctx, _) => {
         try {
             const validateRes = helper.joiValite('request query')(ctx.request.query, queryByName)
             if(validateRes) {
                 ctx.body = validateRes
-                return ;
+                return 
             }
 
             const {
@@ -151,7 +148,7 @@ module.exports = {
             const validateRes = helper.joiValite('request query')(ctx.request.query, queryById)
             if(validateRes) {
                 ctx.body = validateRes
-                return ;
+                return 
             }
 
             const {

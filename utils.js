@@ -1,3 +1,9 @@
+const fs = require('fs')
+const path = require('path')
+const chalk = require('chalk')
+const requestLogStream = fs.createWriteStream(path.resolve(__dirname, 'log/app.log'), { flags: 'a' })
+const errorLogStream = fs.createWriteStream(path.resolve(__dirname, 'log/error.log'), { flags: 'a' })
+
 /**
  * parse one url query, return a object
  * @param {String} query url query str
@@ -143,8 +149,39 @@ var Base64 = {
     }
   }
   
+function loadRoutes(app) {
+    fs.readdirSync(path.join(__dirname, 'router'))
+        .forEach(routePath => {
+            const router = require(__dirname + '/router/' + routePath)
+            app.use(router.routes())
+        })
+}
+
+// koa request log middleware
+const requestLog = async (ctx, next) => {
+    const sTime = Date.now()
+    await next()
+    
+    const eTime = Date.now()
+    const log = `请求地址：${ctx.path},请求方法：${ctx.request.method},响应时间：${eTime - sTime}ms,响应状态:${ctx.response.status}--请求时间：${new Date()}\n`
+    requestLogStream.write(log)
+    console.log(chalk.green(log))
+}
+
+// koa error log middleware
+const errorLog = async (ctx, next) => {
+    try {
+        await next()
+    } catch (err) {
+        const errorLog = `${new Date()} 发生错误:\n${err.stack}\n`
+        errorLogStream.write(errorLog)
+    }
+}
 
 module.exports = {
     parseUrlQuery,
-    Base64
+    Base64,
+    loadRoutes,
+    requestLog,
+    errorLog
 }

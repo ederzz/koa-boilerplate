@@ -9,39 +9,20 @@ const chalk = require('chalk')
 const cors = require('koa2-cors')
 const shortid = require('shortid')
 
-const indexRouter = require('./router')
-const accountRouter = require('./router/account')
-const githubApiRouter = require('./router/githubApi')
-const uploadRouter = require('./router/upload')
+const initDb = require('./models/db')
 const { mimeCollections } = require('./constants')
+const { loadRoutes, requestLog, errorLog } = require('./utils')
 const staticDirPath = '.' + path.resolve(__dirname, '/static')
-const requestLogStream = fs.createWriteStream(path.resolve(__dirname, 'log/app.log'), { flags: 'a' })
-const errorLogStream = fs.createWriteStream(path.resolve(__dirname, 'log/error.log'), { flags: 'a' })
 
-const app = new Koa()
-const hostname = config.get('host.hostname')
-const port = config.get('host.port')
+const app = module.exports = new Koa()
 
-// error log
-app.use(async (ctx, next) => {
-    try {
-        await next()
-    } catch (err) {
-        const errorLog = `${new Date()} 发生错误:\n${err.stack}\n`
-        errorLogStream.write(errorLog)
-    }
-})
+if (!module.parent) {
+    // error log
+    app.use(requestLog)
 
-// request log
-app.use(async (ctx, next) => {
-    const sTime = Date.now()
-    await next()
-    
-    const eTime = Date.now()
-    const log = `请求地址：${ctx.path},请求方法：${ctx.request.method},响应时间：${eTime - sTime}ms,响应状态:${ctx.response.status}--请求时间：${new Date()}\n`
-    requestLogStream.write(log)
-    console.log(chalk.green(log))
-})
+    // request log
+    app.use(errorLog)
+}
 
 // 指定静态资源目录
 app.use(serve(staticDirPath))
@@ -58,7 +39,7 @@ app.use(nunjucks({
 // 解析post请求
 app.use(bodyParser({
     formidable:{
-        uploadDir: __dirname + '/static', // directory where files will be uploaded
+        uploadDir: __dirname + '/static', // directory where files will be stored
         keepExtensions: true,
         onFileBegin(name, file) {
             const {
@@ -78,7 +59,10 @@ app.use(bodyParser({
                 return null
             }
                             
-            file.path = path.resolve(paths.slice(0, -1).join('/'), dirName, `${shortid.generate()}${suffix}`)
+            file.path = path.resolve(
+                paths.slice(0, -1).join('/'), 
+                dirName, `${shortid.generate()}${suffix}`
+            )
         }
     },
     multipart: true,
@@ -89,12 +73,22 @@ app.use(bodyParser({
 app.use(cors())
 
 // routes
-app.use(indexRouter.routes())
-app.use(accountRouter.routes())
-app.use(githubApiRouter.routes())
-app.use(uploadRouter.routes())
+loadRoutes(app)
 
-app.listen(port, () => {
-    console.log(chalk.green(`server is running at ${hostname}:${port}`))
-    console.log(process.env.NODE_ENV)
-})
+// connect db
+initDb()
+    .on('error', console.log)
+    .on('disconnected', initDb)
+    .on('open', listen)
+
+function listen() {
+    if (!module.parent) {
+        const hostname = config.get('host.hostname')
+        const port = config.get('host.port')
+
+        app.listen(port, () => {
+            console.log(chalk.green(`server is running at ${hostname}:${port}`))
+            console.log('env:' + process.env.NODE_ENV)
+        })
+    }
+}

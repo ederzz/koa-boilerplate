@@ -1,5 +1,5 @@
 const router = require('koa-router')({
-    prefix: '/oauth'
+    prefix: '/github'
 }) 
 const axios = require('axios')
 const cheerio = require('cheerio')

@@ -1,5 +1,5 @@
 # koa-introduction
-> [typescript版本](https://github.com/shenyiling/typescript-node-boilerplate)，添加了部分新内容
+> [typescript版本](https://github.com/shenyiling/typescript-node-boilerplate)，文件内容有所不同
 
 koa application boilerplate.
 
@@ -9,10 +9,14 @@ git clone git@github.com:shenyiling/koa-boilerplate.git
 npm i && npm start
 ```
 
-## 其他命令说明
+## npm scripts
+```Shell
+yarn dev // 文件修改后，自动重启
+yarn debug // 通过google浏览器控制台进行断点调试
+yarn test // 运行测试文件
+```
 
 ## 项目目录结构
-
 ```
 ├── config                  应用配置目录
 │   ├── default.json        默认配置

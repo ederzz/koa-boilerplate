@@ -1,4 +1,4 @@
-const mongoose = require('./db');
+const mongoose = require('mongoose')
 
 const accountSchema = mongoose.Schema({
   accountName: {
@@ -18,5 +18,5 @@ module.exports = {
 }
 
 /**createConnection方式建立model */
-// const con = require('./db');
-// module.exports = con.model('user',UserSchema);
+// const con = require('./db')
+// module.exports = con.model('user',UserSchema)

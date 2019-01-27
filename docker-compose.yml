@@ -1,0 +1,15 @@
+version: "2.2"
+services:
+  app:
+    container_name: koa-boilerplate
+    restart: always
+    build: .
+    ports:
+      - "3002:3002"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
