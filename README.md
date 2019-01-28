@@ -4,6 +4,7 @@
 koa application boilerplate.
 
 ## Usage
+>运行前先启动MongoDB服务
 ```
 git clone git@github.com:shenyiling/koa-boilerplate.git
 npm i && npm start
