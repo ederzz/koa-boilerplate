@@ -4,7 +4,7 @@
 koa application boilerplate.
 
 ## Usage
->运行前先启动MongoDB服务
+>运行前先启动MongoDB服务，或者[修改index.js文件](https://github.com/shenyiling/koa-boilerplate/blob/2d7ef9957168fd54ccaed1948faccb13ace89338/start-ignore-db.md)
 ```
 git clone git@github.com:shenyiling/koa-boilerplate.git
 npm i && npm start
