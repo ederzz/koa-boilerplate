@@ -17,6 +17,12 @@ yarn debug // 通过google浏览器控制台进行断点调试
 yarn test // 运行测试文件
 ```
 
+## docker启动项目
+>先安装`docker`和`docker-compose`
+```
+yarn docker_start
+````
+
 ## 项目目录结构
 ```
 ├── config                  应用配置目录

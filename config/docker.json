@@ -1,0 +1,9 @@
+{
+    "mongoDB": {
+        "hostname": "mongo",
+        "port": 27017,
+        "dbname": "koaIntroduction",
+        "username": "",
+        "password": ""
+    }
+}

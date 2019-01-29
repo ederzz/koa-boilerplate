@@ -6,8 +6,10 @@ services:
     build: .
     ports:
       - "3002:3002"
-    links:
+    depends_on:
       - mongo
+    environment:
+      NODE_ENV: docker
   mongo:
     container_name: mongo
     image: mongo
