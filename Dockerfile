@@ -16,4 +16,4 @@ RUN apk add --no-cache --virtual .gyp \
 # 暴露3002端口
 EXPOSE 3002
 # 程序启动
-CMD ["npm", "start"]
+CMD ["node", "index"]

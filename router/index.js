@@ -4,6 +4,9 @@ const path = require('path')
 const filePath = path.resolve(__dirname, '../static/css/test.css')
 
 const homeController = require('../controller/index');
+const dockerTestFile = fs.createWriteStream('./test.txt', {
+    flags: 'a'
+})
 
 // 路由前缀设置
 // const router = new Router({
@@ -51,6 +54,14 @@ router.get('/', homeController.index)
 .get('/static', async (ctx, _) => {
     ctx.body = fs.readFileSync(filePath)
     return filePath
+})
+.get('/stream', (ctx) => {
+    console.log(dockerTestFile)
+    for(let i = 0; i < 1000; i++) {
+        dockerTestFile.write('i am jzx.\n')
+    }
+    const stream = fs.createReadStream('./test.txt')
+    stream.pipe(ctx.body)
 })
 
 module.exports = router;
