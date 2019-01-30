@@ -23,7 +23,7 @@ yarn test // 运行测试文件
 1.项目目录下：`docker build -t koa_bolilerplate .`  
 2.拉去mongo镜像：`docker pull mongo`  
 3.创建mongo容器：`docker run --name mongo -d -p 27017:27017 mongo`  
-4.创建爱你koa-boilerplate容器：`docker run --name koa-boilerplate -d -p 3002:3002 -e NODE_ENV='docker' --link mongo:mongo koa_bolilerplate`
+4.创建koa-boilerplate容器：`docker run --name koa-boilerplate -d -p 3002:3002 -e NODE_ENV='docker' --link mongo:mongo koa_bolilerplate`
 
 ## 项目目录结构
 ```
